@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.pyc
+
+# Environment & secrets
+.env
+config.py
+
+# Database
+*.db
+
+# Streamlit
+.streamlit/
