@@ -1,9 +1,8 @@
 from openai import OpenAI
-from config import OPENAI_API_KEY
-
-client = OpenAI(api_key=OPENAI_API_KEY)
+from utils.openai_client import get_openai_client
 
 def classify_message(message: str) -> str:
+    client = get_openai_client()
     prompt = f"""
 You are a banking support classifier.
 Classify the message into ONE category only:

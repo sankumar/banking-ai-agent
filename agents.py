@@ -1,11 +1,11 @@
-from openai import OpenAI
-from config import OPENAI_API_KEY
+from utils.openai_client import get_openai_client
 from database import create_ticket, get_ticket_status
 import re
+from openai import OpenAI
 
-client = OpenAI(api_key=OPENAI_API_KEY)
 
 def positive_feedback_agent(customer_name="Customer"):
+    client = get_openai_client()
     prompt = f"""
 Generate a warm thank-you message for a banking customer.
 """
@@ -17,6 +17,7 @@ Generate a warm thank-you message for a banking customer.
     return response.choices[0].message.content.strip()
 
 def negative_feedback_agent(issue):
+    client = get_openai_client()
     ticket_id = create_ticket(issue)
     prompt = f"""
 Generate an empathetic response mentioning ticket #{ticket_id}.
@@ -29,6 +30,7 @@ Generate an empathetic response mentioning ticket #{ticket_id}.
     return response.choices[0].message.content.strip()
 
 def query_handler_agent(message):
+    client = get_openai_client()
     match = re.search(r"(\d{6})", message)
     if not match:
         return "Please provide a valid 6-digit ticket number."

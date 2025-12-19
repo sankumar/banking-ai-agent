@@ -1,5 +1,6 @@
 import streamlit as st
-from classifier import classify_message
+from dotenv import load_dotenv
+load_dotenv()
 from agents import (
     positive_feedback_agent,
     negative_feedback_agent,
@@ -8,6 +9,7 @@ from agents import (
 from database import init_db
 from logger import add_log, get_logs
 from database import get_ticket_count
+from classifier import classify_message
 
 init_db()
 
